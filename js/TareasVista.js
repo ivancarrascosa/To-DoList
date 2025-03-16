@@ -5,7 +5,7 @@ class TareasVista {
         this.tablaTareas = document.getElementById('tablaTareas');
         this.guardar = document.getElementById('guardar');
     }
-
+    
     renderTareas(tareas) {
         this.tablaTareas.innerHTML = '';
         tareas.forEach(element => {

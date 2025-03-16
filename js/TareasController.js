@@ -1,3 +1,6 @@
+function inicializar() {
+    console.log('guardar');
+}
 class TareasController {
     constructor() {
         this.tareasModel = new TareasModel();
@@ -9,7 +12,8 @@ class TareasController {
     }
 
     guardarTareas() {
-        tareasView.guardar.addEventListener('click', () => {
+        this.tareasView.guardar.addEventListener('click', () => {
+        console.log('guardar');
         tareasModel.setTarea(tareasView.descripcion.value);
         tareasView.renderTareas(tareasModel.lista);
     })};

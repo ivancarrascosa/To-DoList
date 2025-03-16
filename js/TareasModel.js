@@ -1,5 +1,5 @@
 class TareasModel {
-
+    
     constructor() {
         this.lista = [];
         this.contador = 1;
@@ -22,7 +22,7 @@ class TareasModel {
         let obj = {
             id: this.contador++,
             descripcion: descripcion,
-            fecha: 2,
+            fecha: new Date(),
             estado: "sin hacer",
         }
         this.lista.push(obj);
