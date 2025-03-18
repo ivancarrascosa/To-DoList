@@ -1,30 +1,52 @@
-function inicializar() {
-    console.log('guardar');
-}
 class TareasController {
     constructor() {
         this.tareasModel = new TareasModel();
-
         this.tareasView = new TareasVista();
 
-        // Que se pongan las tareas en la vista cuando se inice la página
-        this.tareasView.renderTareas(this.tareasModel.lista);
+        // Renderizar tareas al iniciar
+        this.tareasView.renderTareas(this.tareasModel.getTareas());
+
+        // Configurar eventos
+        this.tareasView.guardar.addEventListener('click', () => this.guardarTarea());
+
+        this.tareasView.tablaTareas.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                const id = parseInt(event.target.parentElement.getAttribute('id')); // Lo he probado para hacerlo sin el data-id
+                if (event.target.textContent === 'Eliminar') {
+                    this.eliminarTarea(id);
+                } else if (event.target.textContent === 'Actualizar') {
+                    this.actualizarTarea(id);
+                }
+            }
+        }
+        );
     }
 
-    guardarTareas() {
-        this.tareasView.guardar.addEventListener('click', () => {
-        console.log('guardar');
-        tareasModel.setTarea(tareasView.descripcion.value);
-        tareasView.renderTareas(tareasModel.lista);
-    })};
-
-    eliminar() {
-        this.parentNode.parentNode.remove();
+    guardarTarea() {
+        const descripcion = this.tareasView.descripcion.value;
+        if (descripcion) {
+            this.tareasModel.setTarea(descripcion);
+            this.tareasView.renderTareas(this.tareasModel.getTareas());
+            this.tareasView.descripcion.value = ''; // Limpiar el campo de entrada
+        }
     }
 
-    tareasActualizar() {
-        let idTarea = this.parentNode.id();
-        tareasModel.updateTarea(idTarea);
-        tareasView.renderTareas(tareas);
+    eliminarTarea(id) {
+        this.tareasModel.removeTarea(id);
+        this.tareasView.renderTareas(this.tareasModel.getTareas());
+    }
+
+    actualizarTarea(id) {
+        this.tareasModel.updateTarea(id);
+        this.tareasView.renderTareas(this.tareasModel.getTareas());
     }
 }
+
+// Preguntar a David por que no me funcionaba sin esto
+// Inicializar la aplicación
+function inicializar() {
+    const controller = new TareasController();
+}
+
+// Llamar a inicializar al cargar la página
+window.onload = inicializar;
