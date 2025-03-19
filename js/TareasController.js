@@ -14,7 +14,7 @@ class TareasController {
                 const id = parseInt(event.target.parentElement.getAttribute('id')); // Lo he probado para hacerlo sin el data-id
                 if (event.target.textContent === 'Eliminar') {
                     this.eliminarTarea(id);
-                } else if (event.target.textContent === 'Actualizar') {
+                } else if (event.target.textContent === 'Completada') {
                     this.actualizarTarea(id);
                 }
             }
