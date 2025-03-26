@@ -1,10 +1,20 @@
-class TareasModel {
-    
+class Tarea {
+    constructor(id, descripcion, fecha, estado) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.estado = estado;
+    }
+
+}
+
+class CRUDTareasModel {
+
     constructor() {
         this.lista = [];
         this.contador = 1;
     }
-
+    
     getTareas() {
         return this.lista;
     }
@@ -19,13 +29,8 @@ class TareasModel {
     }
 
     setTarea(descripcion) {
-        let obj = {
-            id: this.contador++,
-            descripcion: descripcion,
-            fecha: new Date(),
-            estado: "sin hacer",
-        }
-        this.lista.push(obj);
+        let tarea = new Tarea(this.contador++, descripcion, new Date(), "sin hacer");
+        this.lista.push(tarea);
     }
 
     removeTarea(id) {
@@ -41,11 +46,15 @@ class TareasModel {
     }
 
     updateTarea(id) {
-        this.lista.forEach(element => {
-            if (element.id === id) {
-                element.estado = "hecho";
+        encontrado = false;
+        index = 0;
+        while (!encontrado) {
+            if (this.lista[index].id === id) {
+                this.lista[index].estado = "hecho";
+                encontrado = true;
             }
-        });
+            index++;
+        }
     }
+};
 
-}
