@@ -1,6 +1,6 @@
 class TareasController {
     constructor() {
-        this.tareasModel = new TareasModel();
+        this.tareasModel = new CRUDTareasModel();
         this.tareasView = new TareasVista();
 
         // Renderizar tareas al iniciar
@@ -32,7 +32,15 @@ class TareasController {
     }
 
     eliminarTarea(id) {
-        this.tareasModel.removeTarea(id);
+        let encontrada = false;
+        let index = 0;
+        while(!encontrada) {
+            if (this.tareasModel.lista[index].id === id) {
+                this.tareasModel.lista[index].eliminada = true;
+                encontrada = true;
+            }
+            index++;
+        }
         this.tareasView.renderTareas(this.tareasModel.getTareas());
     }
 
