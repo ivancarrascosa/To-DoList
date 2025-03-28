@@ -9,6 +9,13 @@ class TareasController {
         // Configurar eventos
         this.tareasView.guardar.addEventListener('click', () => this.guardarTarea());
 
+        this.tareasView.descripcion.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("guardar").click();
+            }
+        });
+
         this.tareasView.tablaTareas.addEventListener('click', (event) => {
             if (event.target.tagName === 'BUTTON') {
                 const id = parseInt(event.target.parentElement.getAttribute('id')); // Lo he probado para hacerlo sin el data-id

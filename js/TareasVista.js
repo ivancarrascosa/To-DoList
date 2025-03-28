@@ -4,6 +4,8 @@ class TareasVista {
         this.descripcion = document.getElementById('descripcion');
         this.tablaTareas = document.getElementById('tablaTareas');
         this.guardar = document.getElementById('guardar');
+        this.inputDescripcion = document.getElementById('descripcion');
+        this.descripcion.focus(); // Cuando se inicia la pagina pone el focus en la descripcion
     }
     
     renderTareas(tareas) {
@@ -38,4 +40,7 @@ class TareasVista {
            console.log(tareas);
         });
     }
+
+    
+
 }
